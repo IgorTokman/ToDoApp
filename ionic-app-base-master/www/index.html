@@ -21,17 +21,24 @@
     <!-- your app's js -->
     <script src="js/app.js"></script>
   </head>
-
-  <body ng-app="starter">
-
+  //start of app
+  <body ng-app="ToDo" ng-controller="ToDoCtrl">
+    //page
     <ion-pane>
 
       <ion-header-bar class="bar-positive">
         <h1 class="title">ToDo</h1>
+        <button class="button icon ion-plus"></button>
       </ion-header-bar>
 
-      <ion-content class="has-header">
-
+      <ion-content>
+        <ion-list>
+          <ion-checkbox ng-repeat="task in tasks"
+                        ng-model="task.done" class=item">
+            <span class="title">{{task.title}}</span>
+            <i class="ion ion-close-circled deleteItem"></i>
+          </ion-checkbox>
+        </ion-list>
       </ion-content>
 
     </ion-pane>

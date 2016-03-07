@@ -1,9 +1,4 @@
-// Ionic Starter App
-
-// angular.module is a global place for creating, registering and retrieving Angular modules
-// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
-// the 2nd parameter is an array of 'requires'
-angular.module('starter', ['ionic'])
+angular.module('ToDo', ['ionic'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -15,7 +10,6 @@ angular.module('starter', ['ionic'])
     // to interact with the app.
     if (window.cordova && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-      cordova.plugins.Keyboard.disableScroll(true);
     }
     if (window.StatusBar) {
       // Set the statusbar to use the default style, tweak this to
@@ -23,4 +17,12 @@ angular.module('starter', ['ionic'])
       StatusBar.styleDefault();
     }
   });
-});
+})
+    .controller('ToDoCtrl', function($scope, $ionicModal){
+      $scope.tasks = [
+        {title: 'one_one_one', desc:'1',done:true},
+        {title: 'two_two_two', desc:'2',done:true},
+        {title: 'three_three_three', desc:'3',done:false},
+        {title: 'four_four_four', desc:'4',done:false},
+      ];
+    });
