@@ -28,16 +28,18 @@
 
       <ion-header-bar class="bar-positive">
         <h1 class="title">ToDo</h1>
-        <button class="button icon ion-plus" ng-click="openTask()"></button>
+        <button class="button icon ion-plus" ng-click="addNewTask()"></button>
       </ion-header-bar>
 
       <ion-content>
         <ion-list>
-          <ion-checkbox ng-repeat="task in tasks"
-                        ng-model="task.done" class=item">
-            <span class="title">{{task.title}}</span>
-            <i class="ion ion-close-circled deleteItem"></i>
-          </ion-checkbox>
+          <ion-item ng-repeat="task in tasks" class="item item-icon-right row" ng-class="{'checked' : task.done}">
+            <label class="checkbox col col-33">
+              <input type="checkbox" ng-model="task.done" ng-click="saveTasks()" />
+            </label>
+            <span class="title col col-33" ng-click="openTask($index)">{{ task.title }}</span>
+            <i class="icon ion-close-circled deleteItem pull-right" ng-click="deleteItem()"></i>
+          </ion-item>
         </ion-list>
       </ion-content>
 

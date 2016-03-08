@@ -24,6 +24,10 @@ angular.module('ToDo', ['ionic'])
         {title: 'two_two_two', desc:'2',done:true},
         {title: 'three_three_three', desc:'3',done:false},
         {title: 'four_four_four', desc:'4',done:false},
+        {title: 'one_one_one', desc:'1',done:true},
+        {title: 'two_two_two', desc:'2',done:true},
+        {title: 'three_three_three', desc:'3',done:false},
+        {title: 'four_four_four', desc:'4',done:false},
       ];
         $ionicModal.fromTemplateUrl('views/task.html', function(modal){
             $scope.taskModel = modal;
@@ -31,10 +35,29 @@ angular.module('ToDo', ['ionic'])
             scope : $scope,
             animation: 'slide-in-up'
         });
-        $scope.openTask = function(){
+
+        $scope.addNewTask = function(){
             $scope.taskModel.show();
         }
+
         $scope.closeTask = function(){
             $scope.taskModel.hide();
+        }
+
+        $scope.deleteItem = function(id){
+            $scope.tasks.splice(id, 1);
+        }
+
+        $scope.currentTaskId = -1;
+
+        $scope.openTask = function(id){
+            var task = $scope.tasks[id];
+            $scope.currentTaskId = id;
+            $scope.activeTask = {
+                title: task.title,
+                desc: task.desc,
+                done: task.done
+            }
+            $scope.taskModel.show();
         }
     });

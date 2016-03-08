@@ -5,8 +5,14 @@
 
 .deleteItem {
     color: red;
-    font-size: 2em;
     position: absolute;
-    right: 0.5em;
+    right: 1em;
 }
 
+.ion-close-circled{
+    background-color: transparent;
+}
+
+.item{
+    line-height: 27px;
+}
