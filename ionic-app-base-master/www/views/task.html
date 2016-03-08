@@ -1,0 +1,29 @@
+<div class="modal">
+
+    <ion-header-bar class="bar bar-header bar-calm">
+        <h1 class="title">New task</h1>
+        <button class="button ion-backspace-outline"
+                ng-click="closeTask()"
+                style="font-size: 1.6em;"></button>
+    </ion-header-bar>
+
+    <ion-content>
+        <form action="">
+            <div class="list">
+                <label class="item item-input">
+                    <input type="text" placeholder="What to do?">
+                </label>
+                <label class="item item-input">
+                    <textarea placeholder="Description"></textarea>
+                </label>
+                <div class="padding">
+                    <button type="submit"
+                            class="button-positive button-block button">
+                        Add
+                    </button>
+                </div>
+            </div>
+        </form>
+    </ion-content>
+
+</div>

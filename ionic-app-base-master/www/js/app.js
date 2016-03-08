@@ -25,4 +25,16 @@ angular.module('ToDo', ['ionic'])
         {title: 'three_three_three', desc:'3',done:false},
         {title: 'four_four_four', desc:'4',done:false},
       ];
+        $ionicModal.fromTemplateUrl('views/task.html', function(modal){
+            $scope.taskModel = modal;
+        },{
+            scope : $scope,
+            animation: 'slide-in-up'
+        });
+        $scope.openTask = function(){
+            $scope.taskModel.show();
+        }
+        $scope.closeTask = function(){
+            $scope.taskModel.hide();
+        }
     });
