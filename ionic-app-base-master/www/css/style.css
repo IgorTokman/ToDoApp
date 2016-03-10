@@ -6,7 +6,7 @@
 .deleteItem {
     color: red;
     position: absolute;
-    right: 1em;
+    right: 0.5em;
 }
 
 .ion-close-circled{

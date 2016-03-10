@@ -37,8 +37,8 @@
             <label class="checkbox col col-33">
               <input type="checkbox" ng-model="task.done" ng-click="saveTasks()" />
             </label>
-            <span class="title col col-33" ng-click="openTask($index)">{{ task.title }}</span>
-            <i class="icon ion-close-circled deleteItem pull-right" ng-click="deleteItem()"></i>
+            <span class="title col col-33" ng-click="editTask($index)">{{ task.title }}</span>
+            <i class="icon ion-close-circled deleteItem pull-right" ng-click="deleteItem($index)"></i>
           </ion-item>
         </ion-list>
       </ion-content>

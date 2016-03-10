@@ -19,45 +19,81 @@ angular.module('ToDo', ['ionic'])
   });
 })
     .controller('ToDoCtrl', function($scope, $ionicModal){
-      $scope.tasks = [
-        {title: 'one_one_one', desc:'1',done:true},
-        {title: 'two_two_two', desc:'2',done:true},
-        {title: 'three_three_three', desc:'3',done:false},
-        {title: 'four_four_four', desc:'4',done:false},
-        {title: 'one_one_one', desc:'1',done:true},
-        {title: 'two_two_two', desc:'2',done:true},
-        {title: 'three_three_three', desc:'3',done:false},
-        {title: 'four_four_four', desc:'4',done:false},
-      ];
-        $ionicModal.fromTemplateUrl('views/task.html', function(modal){
-            $scope.taskModel = modal;
+       if(!angular.isUndefined(window.localStorage['tasks']))
+         $scope.tasks = JSON.parse(window.localStorage['tasks']);
+       else
+          $scope.tasks = [
+          ];
+        $ionicModal.fromTemplateUrl('views/add.html', function(modal){
+            $scope.addModel = modal;
+        },{
+            scope : $scope,
+            animation: 'slide-in-up'
+        });
+        $ionicModal.fromTemplateUrl('views/edit.html', function(modal){
+            $scope.editModel = modal;
         },{
             scope : $scope,
             animation: 'slide-in-up'
         });
 
         $scope.addNewTask = function(){
-            $scope.taskModel.show();
+
+            $scope.addModel.show();
         }
 
-        $scope.closeTask = function(){
-            $scope.taskModel.hide();
+        $scope.addTask = function(task){
+
+            $scope.tasks.push({
+                title:  task.title,
+                desc:   task.desc,
+                done:   task.done,
+            });
+
+            saveItems();
+            $scope.addModel.hide();
+        }
+
+        $scope.closeAddTask = function(){
+            $scope.addModel.hide();
+        }
+
+        $scope.closeEditTask = function(){
+            $scope.editModel.hide();
         }
 
         $scope.deleteItem = function(id){
             $scope.tasks.splice(id, 1);
+            saveItems();
         }
 
         $scope.currentTaskId = -1;
 
-        $scope.openTask = function(id){
+        $scope.editTask = function(id){
             var task = $scope.tasks[id];
             $scope.currentTaskId = id;
+
             $scope.activeTask = {
                 title: task.title,
                 desc: task.desc,
                 done: task.done
             }
-            $scope.taskModel.show();
+            $scope.editModel.show();
+        }
+
+        $scope.saveTask = function(){
+            var id = $scope.currentTaskId;
+
+            $scope.tasks[id].title = $scope.activeTask.title;
+            $scope.tasks[id].desc = $scope.activeTask.desc;
+            $scope.tasks[id].done = $scope.activeTask.done;
+
+            saveItems();
+
+            $scope.editModel.hide();
+        }
+
+        function saveItems(){
+            window.localStorage['tasks'] = angular.toJson($scope.tasks);
         }
     });
