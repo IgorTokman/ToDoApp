@@ -11,16 +11,16 @@
         <form action="">
             <div class="list">
                 <label class="item item-input">
-                    <input type="text" placeholder="What to do?" ng-model="addTask.title">
+                    <input type="text" placeholder="What to do?" ng-model="ANTask.title">
                 </label>
                 <label class="item item-input">
-                    <textarea placeholder="Description" ng-model="addTask.desc"></textarea>
+                    <textarea placeholder="Description" ng-model="ANTask.desc"></textarea>
                 </label>
                 <ul class="list">
                     <li class="item item-toggle">
                         <span class="toggle-item">Done</span>
                         <label class="toggle toggle-positive">
-                            <input type="checkbox" ng-model="addTask.done" />
+                            <input type="checkbox" ng-model="ANTask.done" />
                             <div class="track">
                                 <div class="handle"></div>
                             </div>
@@ -28,7 +28,7 @@
                     </li>
                 </ul>
                 <div class="padding">
-                    <i class="button-positive button-block button" ng-click= "addTask(addTask)">
+                    <i class="button-positive button-block button" ng-click= "addTask(ANTask)">
                         Add
                     </i>
                 </div>

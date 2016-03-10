@@ -42,6 +42,8 @@ angular.module('ToDo', ['ionic'])
             $scope.addModel.show();
         }
 
+        $scope.ANTask = {}
+
         $scope.addTask = function(task){
 
             $scope.tasks.push({
@@ -51,6 +53,8 @@ angular.module('ToDo', ['ionic'])
             });
 
             saveItems();
+            
+            $scope.ANTask = {};
             $scope.addModel.hide();
         }
 
@@ -78,6 +82,7 @@ angular.module('ToDo', ['ionic'])
                 desc: task.desc,
                 done: task.done
             }
+
             $scope.editModel.show();
         }
 

@@ -33,7 +33,8 @@
 
       <ion-content>
         <ion-list>
-          <ion-item ng-repeat="task in tasks" class="item item-icon-right row" ng-class="{'checked' : task.done}">
+          <ion-item ng-repeat="task in tasks" class="item item-icon-right animated row"
+                    ng-class="{'checked' : task.done}" >
             <label class="checkbox col col-33">
               <input type="checkbox" ng-model="task.done" ng-click="saveTasks()" />
             </label>
