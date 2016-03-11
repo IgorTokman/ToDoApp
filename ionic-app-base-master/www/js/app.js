@@ -1,9 +1,4 @@
-// Ionic Starter App
-
-// angular.module is a global place for creating, registering and retrieving Angular modules
-// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
-// the 2nd parameter is an array of 'requires'
-angular.module('starter', ['ionic'])
+angular.module('ToDo', ['ionic'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -15,7 +10,6 @@ angular.module('starter', ['ionic'])
     // to interact with the app.
     if (window.cordova && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-      cordova.plugins.Keyboard.disableScroll(true);
     }
     if (window.StatusBar) {
       // Set the statusbar to use the default style, tweak this to
@@ -23,4 +17,107 @@ angular.module('starter', ['ionic'])
       StatusBar.styleDefault();
     }
   });
-});
+})
+    //The main app controller
+    .controller('ToDoCtrl', function($scope, $ionicModal){
+
+        //Checks if the tasks exist in the window.localStorage
+       if(!angular.isUndefined(window.localStorage['tasks']))
+         $scope.tasks = JSON.parse(window.localStorage['tasks']);
+       else
+           //else gets the empty array of tasks
+          $scope.tasks = [
+          ];
+
+        //Loads the view for adding the new task
+        $ionicModal.fromTemplateUrl('views/add.html', function(modal){
+            $scope.addModel = modal;
+        },{
+            scope : $scope,
+            animation: 'slide-in-up'
+        });
+
+        //Loads the view for editing the task
+        $ionicModal.fromTemplateUrl('views/edit.html', function(modal){
+            $scope.editModel = modal;
+        },{
+            scope : $scope,
+            animation: 'slide-in-up'
+        });
+
+        //Shows the adding window
+        $scope.addNewTask = function(){
+
+            $scope.addModel.show();
+        }
+
+        //The task item for adding new task
+        $scope.ANTask = {}
+
+        //Adds the task into the task array and saves the changes
+        $scope.addTask = function(task){
+
+            $scope.tasks.push({
+                title:  task.title,
+                desc:   task.desc,
+                done:   task.done,
+            });
+
+            saveItems();
+
+            $scope.ANTask = {};
+            $scope.addModel.hide();
+        }
+
+        //Hides the adding window
+        $scope.closeAddTask = function(){
+            $scope.addModel.hide();
+        }
+
+        //Hides the editing window
+        $scope.closeEditTask = function(){
+            $scope.editModel.hide();
+        }
+
+        //Deletes the selected items from task array and saves the changes
+        $scope.deleteItem = function(id){
+            $scope.tasks.splice(id, 1);
+            saveItems();
+        }
+
+        //Stores the current task id
+        $scope.currentTaskId = -1;
+
+        //Edits the selected task
+        $scope.editTask = function(id){
+            var task = $scope.tasks[id];
+            $scope.currentTaskId = id;
+
+            $scope.activeTask = {
+                title: task.title,
+                desc: task.desc,
+                done: task.done
+            }
+
+            //Shows the editing window
+            $scope.editModel.show();
+        }
+
+        //Saves the changes in the selected task
+        $scope.saveTask = function(){
+            var id = $scope.currentTaskId;
+
+            $scope.tasks[id].title = $scope.activeTask.title;
+            $scope.tasks[id].desc = $scope.activeTask.desc;
+            $scope.tasks[id].done = $scope.activeTask.done;
+
+            saveItems();
+
+            $scope.editModel.hide();
+        }
+
+        //Saves the task array in the window.localStorage
+        function saveItems(){
+            window.localStorage['tasks'] = angular.toJson($scope.tasks);
+        }
+    });

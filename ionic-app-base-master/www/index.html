@@ -22,18 +22,43 @@
     <script src="js/app.js"></script>
   </head>
 
-  <body ng-app="starter">
+  <!--Start of app-->
+  <body ng-app="ToDo" ng-controller="ToDoCtrl">
 
-    <ion-pane>
+  <!--The main page-->
+  <ion-pane>
 
-      <ion-header-bar class="bar-positive">
-        <h1 class="title">ToDo</h1>
-      </ion-header-bar>
+    <!--The top header of application-->
+    <ion-header-bar class="bar-positive">
+      <h1 class="title">ToDo</h1>
+      <button class="button icon ion-plus" ng-click="addNewTask()"></button>
+    </ion-header-bar>
 
-      <ion-content class="has-header">
+    <!--The main part of app - basic content-->
+    <ion-content>
 
-      </ion-content>
+      <ion-list>
 
-    </ion-pane>
-  </body>
+        <!--One item - one task-->
+        <ion-item ng-repeat="task in tasks" class="item item-icon-right animated row"
+                  ng-class="{'checked' : task.done}" >
+
+          <!--Checkbox for task complete-->
+          <label class="checkbox col col-33">
+            <input type="checkbox" ng-model="task.done" ng-click="saveTasks()" />
+          </label>
+
+          <!--Editing the task on the click item title-->
+          <span class="title col col-33" ng-click="editTask($index)">{{ task.title }}</span>
+
+          <!--Deletes the task-->
+          <i class="icon ion-close-circled deleteItem pull-right" ng-click="deleteItem($index)"></i>
+        </ion-item>
+
+      </ion-list>
+
+    </ion-content>
+
+  </ion-pane>
+</body>
 </html>
