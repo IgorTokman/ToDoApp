@@ -1,5 +1,7 @@
+<!--Editing window-->
 <div class="modal">
 
+    <!--The top header of window-->
     <ion-header-bar class="bar bar-header bar-calm">
         <h1 class="title">Edit task</h1>
         <button class="button ion-backspace-outline"
@@ -7,15 +9,22 @@
                 style="font-size: 1.6em;"></button>
     </ion-header-bar>
 
+    <!--The main part of window - basic content-->
     <ion-content>
         <form action="">
             <div class="list">
+
+                <!--The task title-->
                 <label class="item item-input">
                     <input type="text" ng-model="activeTask.title">
                 </label>
+
+                <!--The task description-->
                 <label class="item item-input">
                     <textarea ng-model="activeTask.desc"></textarea>
                 </label>
+
+                <!--If the task is executed-->
                 <ul class="list">
                     <li class="item item-toggle">
                         <span class="toggle-item">Done</span>
@@ -27,11 +36,14 @@
                         </label>
                     </li>
                 </ul>
+
+                <!--Saves the changes the task-->
                 <div class="padding">
                     <i class="button-positive button-block button" ng-click= "saveTask(addTask)">
                         Save
                     </i>
                 </div>
+
             </div>
         </form>
     </ion-content>
